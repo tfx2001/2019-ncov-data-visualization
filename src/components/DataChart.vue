@@ -22,9 +22,6 @@ export default {
         visible: false,
         text: `${this.title}每日疫情趋势`
       },
-      label: {
-        visible: true
-      },
       point: {
         visible: true,
         size: 5

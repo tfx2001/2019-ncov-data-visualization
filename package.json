@@ -44,5 +44,6 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "homepage": "https://tfx2001.github.io/2019-ncov-data-visualization/",
 }

@@ -1,0 +1,14 @@
+name: GitHub Pages Deploy
+
+on:
+  [push]:
+    branches: master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: GitHub Pages Deply
+        uses: maxheld83/ghpages@v0.2.1

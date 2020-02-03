@@ -7,5 +7,6 @@ module.exports = {
         }
       }
     }])
-  }
+  },
+  publicPath: ''
 }

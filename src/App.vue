@@ -30,7 +30,7 @@
             </v-row>
             <v-row justify="center">
               <v-col>
-                <data-chart :chart-data="chartData"></data-chart>
+                <data-chart :chart-data="chartData" :title="chartTitle" class="mt-n10"></data-chart>
               </v-col>
             </v-row>
             <v-row>
@@ -66,7 +66,8 @@ export default {
     provinces: [],
     citiesRaw: [],
     currentProvince: {},
-    chartData: []
+    chartData: [],
+    chartTitle: ""
   }),
   computed: {
     citiesName() {
@@ -86,7 +87,7 @@ export default {
           .get(
             `http://ncov.nosensor.com:8080/api/${
               val == this.currentProvince.name ? "province" : "city"
-            }=${val}`
+            }=${val.slice(0, 2)}`
           )
           .then(response => {
             let res = [];
@@ -100,10 +101,14 @@ export default {
               res.push({ date, type: "确诊", value: iterator.Confirmed });
               res.push({ date, type: "治愈", value: iterator.Cured });
               res.push({ date, type: "死亡", value: iterator.Dead });
-              res.push({ date, type: "重症", value: iterator.Severe });
+              res.push({ date, type: "重症", value: iterator.Severe + iterator.Critical });
             }
             res = res.reverse();
             this.chartData = res;
+            this.chartTitle =
+              val == this.currentProvince.name
+                ? this.currentProvince.name
+                : val;
           });
       } else {
         this.onProvinceSelectChange(this.currentProvince);
@@ -111,7 +116,7 @@ export default {
     },
     onProvinceSelectChange(val) {
       axios
-        .get(`http://ncov.nosensor.com:8080/api/province=${val.name}`)
+        .get(`http://ncov.nosensor.com:8080/api/province=${val.name.slice(0, 2)}`)
         .then(response => {
           let res = [];
           for (const iterator of response.data["province"]) {
@@ -126,6 +131,7 @@ export default {
           }
           res = res.reverse();
           this.chartData = res;
+          this.chartTitle = val.name;
         });
     }
   },

@@ -8,7 +8,8 @@ var linePlot;
 export default {
   name: "data-chart",
   props: {
-    chartData: Array
+    chartData: Array,
+    title: String
   },
   data: () => ({}),
   mounted() {
@@ -17,15 +18,22 @@ export default {
       xField: "date",
       yField: "value",
       seriesField: "type",
+      title: {
+        visible: false,
+        text: `${this.title}每日疫情趋势`
+      },
+      label: {
+        visible: true
+      },
       point: {
         visible: true,
         size: 5
       },
-      lineSize: 3,
-      smooth: true,
       xAxis: {
         autoHideLabel: true
       },
+      lineSize: 3,
+      smooth: true,
       color(val) {
         switch (val) {
           case "确诊":
@@ -47,6 +55,13 @@ export default {
     chartData: function(val) {
       // eslint-disable-next-line no-console
       linePlot.changeData(this.chartData);
+      linePlot.updateConfig({
+        title: {
+          visible: true,
+          text: `${this.title}每日疫情趋势`
+        }
+      });
+      linePlot.render();
     }
   }
 };

@@ -50,13 +50,13 @@ export default {
   },
   methods: {},
   created() {
-    axios.get("/json/province.json").then(response => {
+    axios.get("json/province.json").then(response => {
       for (const index of response.data) {
         this.provinces.push({ text: index.name, value: index.id });
       }
     });
     axios
-      .get("/json/city.json")
+      .get("json/city.json")
       .then(response => (this.citiesRaw = response.data));
   }
 };

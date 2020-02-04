@@ -36,4 +36,4 @@ jobs:
         env:
           PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./out
+          PUBLISH_DIR: ./dist

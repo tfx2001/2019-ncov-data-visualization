@@ -49,7 +49,7 @@
         </v-row>
       </v-container>
     </v-content>
-    <v-footer app>
+    <v-footer app absolute>
       <v-row>
         <v-col class="text-center">
           Proudly&nbsp;developed&nbsp;with<a href="https://vuetifyjs.com/" class="mx-1 font-weight-medium">Vuetify</a>&<a href="https://g2plot.antv.vision/" class="mx-1 font-weight-medium">G2Plot</a>

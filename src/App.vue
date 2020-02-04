@@ -49,6 +49,13 @@
         </v-row>
       </v-container>
     </v-content>
+    <v-footer app>
+      <v-row>
+        <v-col class="text-center">
+          Proudly&nbsp;developed&nbsp;with<a href="https://vuetifyjs.com/" class="mx-1 font-weight-medium">Vuetify</a>&<a href="https://g2plot.antv.vision/" class="mx-1 font-weight-medium">G2Plot</a>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -82,13 +89,9 @@ export default {
   },
   methods: {
     onCitySelectChange(val) {
-      if (val) {
+      if (val && val != "市辖区") {
         axios
-          .get(
-            `http://ncov.nosensor.com:8080/api/${
-              val == "市辖区" ? "province" : "city"
-            }=${val.slice(0, 2)}`
-          )
+          .get(`http://ncov.nosensor.com:8080/api/city=${val}`)
           .then(response => {
             let res = [];
             for (const iterator of response.data[
@@ -105,7 +108,7 @@ export default {
             }
             res = res.reverse();
             this.chartData = res;
-            this.chartTitle = val == "市辖区" ? this.currentProvince.name : val;
+            this.chartTitle = val;
           });
       } else {
         this.onProvinceSelectChange(this.currentProvince);

@@ -1,5 +1,8 @@
 <template>
-  <div id="canvas"></div>
+  <div>
+    <h4 v-show="title.length" class="mx-6">{{ title }}每日疫情趋势</h4>
+    <div id="canvas"></div>
+  </div>
 </template>
 
 <script>
@@ -20,10 +23,6 @@ export default {
       seriesField: "type",
       forceFit: true,
       padding: "auto",
-      title: {
-        visible: false,
-        text: `${this.title}每日疫情趋势`
-      },
       point: {
         visible: true,
         size: 5
@@ -33,7 +32,7 @@ export default {
       },
       interactions: [
         {
-          type: "slider",
+          type: "slider"
         }
       ],
       lineSize: 3,
@@ -56,20 +55,15 @@ export default {
   },
   watch: {
     // eslint-disable-next-line no-unused-vars
-    chartData: function(val) {
-      // eslint-disable-next-line no-console
+    chartData(val) {
       linePlot.changeData(this.chartData);
-      linePlot.updateConfig({
-        title: {
-          visible: true,
-          text: `${this.title}每日疫情趋势`
-        }
-      });
-      linePlot.render();
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+h4 {
+  user-select: none;
+}
 </style>

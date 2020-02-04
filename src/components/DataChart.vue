@@ -24,9 +24,6 @@ export default {
         visible: false,
         text: `${this.title}每日疫情趋势`
       },
-      legend: {
-        position: "right-top"
-      },
       point: {
         visible: true,
         size: 5

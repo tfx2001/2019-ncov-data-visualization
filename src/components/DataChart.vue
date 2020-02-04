@@ -18,9 +18,14 @@ export default {
       xField: "date",
       yField: "value",
       seriesField: "type",
+      forceFit: true,
+      padding: "auto",
       title: {
         visible: false,
         text: `${this.title}每日疫情趋势`
+      },
+      legend: {
+        position: "right-top"
       },
       point: {
         visible: true,
@@ -29,6 +34,11 @@ export default {
       xAxis: {
         autoHideLabel: true
       },
+      interactions: [
+        {
+          type: "slider",
+        }
+      ],
       lineSize: 3,
       smooth: true,
       color(val) {

@@ -86,13 +86,13 @@ export default {
         axios
           .get(
             `http://ncov.nosensor.com:8080/api/${
-              val == this.currentProvince.name ? "province" : "city"
+              val == "市辖区" ? "province" : "city"
             }=${val.slice(0, 2)}`
           )
           .then(response => {
             let res = [];
             for (const iterator of response.data[
-              val == this.currentProvince.name ? "province" : "city"
+              val == "市辖区" ? "province" : "city"
             ]) {
               let date = (() => {
                 let ymd = iterator.Date.split("-");
@@ -101,14 +101,11 @@ export default {
               res.push({ date, type: "确诊", value: iterator.Confirmed });
               res.push({ date, type: "治愈", value: iterator.Cured });
               res.push({ date, type: "死亡", value: iterator.Dead });
-              res.push({ date, type: "重症", value: iterator.Severe + iterator.Critical });
+              res.push({ date, type: "重症", value: iterator.Severe });
             }
             res = res.reverse();
             this.chartData = res;
-            this.chartTitle =
-              val == this.currentProvince.name
-                ? this.currentProvince.name
-                : val;
+            this.chartTitle = val == "市辖区" ? this.currentProvince.name : val;
           });
       } else {
         this.onProvinceSelectChange(this.currentProvince);
@@ -116,7 +113,9 @@ export default {
     },
     onProvinceSelectChange(val) {
       axios
-        .get(`http://ncov.nosensor.com:8080/api/province=${val.name.slice(0, 2)}`)
+        .get(
+          `http://ncov.nosensor.com:8080/api/province=${val.name.slice(0, 2)}`
+        )
         .then(response => {
           let res = [];
           for (const iterator of response.data["province"]) {

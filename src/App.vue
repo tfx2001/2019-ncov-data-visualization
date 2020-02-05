@@ -149,6 +149,12 @@ export default {
     axios
       .get("json/city.json")
       .then(response => (this.citiesRaw = response.data));
+  },
+  mounted() {
+    const script = document.createElement('script');
+    script.type = "text/javascript",
+    script.src = "https://v1.cnzz.com/z_stat.php?id=1278600403&web_id=1278600403";
+    document.body.appendChild(script);
   }
 };
 </script>

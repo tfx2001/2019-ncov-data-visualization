@@ -2,6 +2,10 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center title">2019-nCov每日疫情数据可视化</div>
+      <v-spacer></v-spacer>
+      <v-btn href="https://github.com/tfx2001/2019-ncov-data-visualization" icon large>
+        <v-icon>{{ githubIcon }}</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <v-container fluid>
@@ -61,6 +65,7 @@
 
 <script>
 import { DataChart } from "./components";
+import { mdiGithubCircle } from '@mdi/js';
 import axios from "axios";
 
 export default {
@@ -74,7 +79,8 @@ export default {
     citiesRaw: [],
     currentProvince: {},
     chartData: [],
-    chartTitle: ""
+    chartTitle: "",
+    githubIcon: mdiGithubCircle
   }),
   computed: {
     citiesName() {
